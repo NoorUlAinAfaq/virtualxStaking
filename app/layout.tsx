@@ -88,7 +88,7 @@ export default function RootLayout({
             modalSize="compact"
           >
             <header className="main-container flex justify-between rounded-[38px] mt-4">
-              <div className="text-white m-auto text-2xl">
+              <div className="text-white m-auto md:text-2xl text-sm">
                 <h6>
                   Token Address: 0xa975be9202ce26dde8bce29034be42bcd4861e36
                 </h6>
