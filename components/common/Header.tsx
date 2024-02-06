@@ -185,9 +185,29 @@ const Header = () => {
               </RainbowKitProvider>
             </WagmiConfig> */}
 
+            <div className="flex m-auto gap-5">
+              <a
+                href="https://www.twitter.com/VirtualX5GUK"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="bg-brandColor border-[3px] border-brandColor button-small text-white rounded-3xl px-4 py-2 hover:bg-dark active:border-b-[3px] active:border-lightPink">
+                  <XIcon />
+                </div>
+              </a>
+              <a
+                href="https://t.me/VirtualXuk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="bg-brandColor border-[3px] border-brandColor button-small text-white rounded-3xl px-4 py-2 hover:bg-dark active:border-b-[3px] active:border-lightPink">
+                  <TelegramIcon />
+                </div>
+              </a>
+            </div>
             <PrimaryBtn download={true} text="Whitepaper" />
             {/* <PrimaryBtn action={() => {sendTransaction(); setTokensToSend("")}} text="Buy Presale" /> */}
-            <input
+            {/* <input
               value={tokensToSend}
               type="number"
               style={{ WebkitAppearance: "none" }}
@@ -196,7 +216,7 @@ const Header = () => {
               onChange={(e) => {
                 setTokensToSend(e.target.value);
               }}
-            />
+            /> */}
           </div>
         </div>
       )}

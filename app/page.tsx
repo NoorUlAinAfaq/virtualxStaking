@@ -18,6 +18,7 @@ export default function Home() {
 
         {/* hero text container */}
         <div className=" text-center lg:text-left xl:pt-10">
+          
           <div><h2 className='xl:whitespace-nowrap text-[28px] -tracking-[1.54px] md:text-[32px] lg:tracking-normal lg:text-[40px] xl:-mt-10 xxl:-mt-10'>Virtual <span className='text-brandColor'>X</span> is launching....</h2></div>
           <div>
             <h1 className='mt-4 text-[44.89px] -tracking-[2.469px] md:text-[85px] xl:tracking-normal xxl:text-[90px] xxl:tracking-[-5.934px] xl:whitespace-nowrap hero-text'>V <span className='text-brandColor'>Mobile</span></h1>
