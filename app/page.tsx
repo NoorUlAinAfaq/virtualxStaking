@@ -59,7 +59,7 @@ export default function Home() {
 
       <RoadMapSection />
 
-      <TeamSection />
+      {/* <TeamSection /> */}
 
       <Faqs faqs={FaqsData} />
 
