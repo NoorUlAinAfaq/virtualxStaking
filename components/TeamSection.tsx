@@ -13,7 +13,13 @@ const TeamSection = () => {
           return (
             <div className='mx-auto bg-brandColor border border-brandColor rounded-[20px] text-center px-10 md:px-16 py-5 transition-all' key={index}>
               <div className='grayscale'>
-                <Image src={item.photo} alt="" className='rounded-full w-40 h-40' />
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={item.photo}
+                    alt=""
+                    className="rounded-full w-40 h-40"
+                  />
+                </a>
               </div>
               <h3 className='text-xl font-bold mt-4'>{item.name}</h3>
               <p className='text-sm text-[#adacac]'>{item.title}</p>
