@@ -46,16 +46,22 @@ const Footer = () => {
       name: "Road map",
       link: "/#roadmap",
     },
+    
   ];
 
   const Home = [
-    {
+    
+  {
       name: "Terms & Conditions",
       link: "/terms",
     },
     {
       name: "Privacy Policy",
       link: "/privacy",
+    },
+    {
+      name: "Staking",
+      link: "/stake",
     },
     {
       name: "FAQ",

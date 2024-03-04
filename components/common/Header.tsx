@@ -7,83 +7,47 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Data from "./config.json";
 import XIcon from "@mui/icons-material/X";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import Link from "next/link";
 
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { useAccount, WagmiProvider } from "wagmi";
 import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  connectorsForWallets,
-} from "@rainbow-me/rainbowkit";
-import {
-  argentWallet,
-  trustWallet,
-  ledgerWallet,
-} from "@rainbow-me/rainbowkit/wallets";
-import {
-  injectedWallet,
-  rainbowWallet,
-  walletConnectWallet,
-} from "@rainbow-me/rainbowkit/wallets";
-
-import {
-  configureChains,
-  createConfig,
-  useAccount,
-  useContractWrite,
-  usePrepareSendTransaction,
-  useSendTransaction,
-  WagmiConfig,
-} from "wagmi";
-
-import { bscTestnet, bsc, polygonMumbai } from "wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
-import { parseEther } from "viem";
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+  zora,
+  bsc,
+} from "wagmi/chains";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const projectId = "da2ffc3f8eb0b295ff1ec21d73e08f8a";
-
-const { chains, publicClient } = configureChains([bsc], [publicProvider()]);
-const { wallets } = getDefaultWallets({
-  appName: "Virtual X",
-  projectId,
-  chains,
-});
 
 const VirtualXInfo = {
   appName: "Virtual X",
 };
-const connectors = connectorsForWallets([
-  ...wallets,
-  {
-    groupName: "Recommended",
-    wallets: [
-      injectedWallet({ chains }),
-      rainbowWallet({ projectId, chains }),
-      walletConnectWallet({ projectId, chains }),
-    ],
-  },
-]);
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
+
+const config = getDefaultConfig({
+  appName: "Virtual X",
+  projectId: projectId,
+  chains: [bsc],
+  ssr: true, // If your dApp uses server side rendering (SSR)
 });
+
+const queryClient = new QueryClient();
+
 const Header = () => {
-  const { contractAddress, ABI } = Data;
-  const { address, isConnecting, isDisconnected } = useAccount();
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const Address = address;
-  const [tokensToSend, setTokensToSend] = useState<string>("");
-
-  const { data, isLoading, isSuccess, sendTransaction } = useSendTransaction({
-    to: Data.contractAddress,
-    value: parseEther(tokensToSend),
-  });
 
   return (
     <header className="main-container bg-dark flex justify-between items-center rounded-[38px] mt-10 py-[13px] px-[28px] relative z-20">
       {/* logo */}
       <div className="logo">
-        <Image src={Logo} alt="logo" className="w-28 md:w-[218px]" />
+        <Link href="/#">
+          <Image src={Logo} alt="logo" className="w-28 md:w-[218px]" />
+        </Link>
       </div>
 
       {/* mobile menu button */}
@@ -128,17 +92,7 @@ const Header = () => {
 
       {/* Desktop Menu */}
       <div className="hidden lg:flex space-x-4">
-        {/* <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider
-            chains={chains}
-            appInfo={VirtualXInfo}
-            modalSize="compact"
-          >
-            <div>
-              <ConnectButton />
-            </div>
-          </RainbowKitProvider>
-        </WagmiConfig> */}
+        <ConnectButton />
         <div className="flex m-auto gap-5">
           <a
             href="https://www.twitter.com/VirtualX5GUK"
@@ -160,6 +114,9 @@ const Header = () => {
           </a>
         </div>
         <PrimaryBtn download={true} text="Whitepaper" />
+        <Link href="/stake">
+          <PrimaryBtn text="Stake Now" />
+        </Link>
         {/* <PrimaryBtn action={() => {sendTransaction(); setTokensToSend("")}} text="Buy Presale" /> */}
         {/* <input value={tokensToSend} type="number" style={{WebkitAppearance : "none"}} className="font-SourceSans3 bg-brandColor border-[3px] border-brandColor button-small text-white rounded-3xl px-4 py-2 hover:bg-dark active:border-b-[3px] active:border-lightPink" placeholder="BNB's To Invest" onChange={(e) => {
           setTokensToSend(e.target.value)
@@ -205,7 +162,12 @@ const Header = () => {
                 </div>
               </a>
             </div>
+
             <PrimaryBtn download={true} text="Whitepaper" />
+            <Link href="/stake">
+              <PrimaryBtn text="Stake Now" />
+            </Link>
+
             {/* <PrimaryBtn action={() => {sendTransaction(); setTokensToSend("")}} text="Buy Presale" /> */}
             {/* <input
               value={tokensToSend}
